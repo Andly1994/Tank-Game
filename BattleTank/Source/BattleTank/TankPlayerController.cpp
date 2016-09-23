@@ -22,4 +22,44 @@ void ATankPlayerController::BeginPlay() {
 		}
 }
 
+//Tick
+	//Super
+	//AimTowardsCrosshair
+
+void ATankPlayerController::Tick(float DeltaTime){
+	Super::Tick(DeltaTime);
+	AimTowardsCrosshair();
+	//UE_LOG(LogTemp,Warning,TEXT("Ticking"))
+}
+
+void ATankPlayerController::AimTowardsCrosshair()
+{
+	if (!GetControlledTank()) { return; }
+	FVector HitLocation;
+	if (GetSightRayHitLocation(HitLocation)) {
+		FHitResult HitResult;
+		auto LineStart = PlayerCameraManager->GetCameraLocation();
+		auto LineEnd = LineStart + LineTraceLength * HitLocation;
+		GetWorld()->LineTraceSingleByChannel(HitResult, LineStart, LineEnd, ECollisionChannel::ECC_Visibility);
+			HitLocation = HitResult.Location;
+			GetControlledTank()->AimAt(HitLocation);
+		
+		
+	}
+	
+}
+
+bool ATankPlayerController::GetSightRayHitLocation(FVector & HitLocation) const
+{
+	int32 ViewportSizeX, ViewportSizeY;
+	GetViewportSize(ViewportSizeX, ViewportSizeY);
+	auto ScreenLocation = FVector2D(ViewportSizeX*CrossHairXLocation, ViewportSizeY*CrossHairYLocation);
+	//DrawDebugLine(GetWorld(),this->PlayerCameraManager->GetCameraLocation(), this->PlayerCameraManager->GetCameraLocation()+this->GetViewportSize/6*)
+	FVector WorldLocation;
+	DeprojectScreenPositionToWorld(ScreenLocation.X, ScreenLocation.Y, WorldLocation,HitLocation);
+	return true;
+}
+
+
+
 
