@@ -8,6 +8,7 @@
 
 class UTankBarrel;
 class UTankTurret;
+class AProjectile;
 
 UCLASS()
 class BATTLETANK_API ATank : public APawn
@@ -21,20 +22,20 @@ public:
 	void Fire();
 private:
 	UPROPERTY(EditAnywhere)
-	float LaunchSpeed = 10000.f;
+	float LaunchSpeed = 5000.f;
 	// Sets default values for this pawn's properties
 	ATank();
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-
-	
+	UPROPERTY(EditAnywhere, Category = Setup)
+	TSubclassOf<AProjectile> ProjectileBluePrint;
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;
 
-
+	UTankBarrel * Barrel;
 protected:
 
 	UTankAimingComponent *TankAimingComponent = nullptr;
