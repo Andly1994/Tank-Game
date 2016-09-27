@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include "TankProjectileMovementComponent.h"
 #include "GameFramework/Actor.h"
 #include "Projectile.generated.h"
 
@@ -16,10 +17,10 @@ public:
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-	
+	void Launch(float Speed);
 	// Called every frame
 	virtual void Tick( float DeltaSeconds ) override;
 
-	
+	UTankProjectileMovementComponent * ProjectileMovementComponent = nullptr;
 	
 };

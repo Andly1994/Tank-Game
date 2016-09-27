@@ -15,8 +15,9 @@ void ATank::SetBarrelReference(UTankBarrel * BarrelToSet, UTankTurret * TurretTo
 void ATank::Fire()
 {
 	if (!Barrel) { return; }
-	GetWorld()->SpawnActor<AProjectile>(ProjectileBluePrint, Barrel->GetSocketLocation(FName("Projectile")), Barrel->GetSocketRotation(FName("Projectile")));
-	UE_LOG(LogTemp,Warning,TEXT("Firing."))
+	auto Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileBluePrint, Barrel->GetSocketLocation(FName("Projectile")), Barrel->GetSocketRotation(FName("Projectile")));
+	//UE_LOG(LogTemp, Warning, TEXT("Firing."))
+	Projectile->Launch(LaunchSpeed);
 }
 
 // Sets default values
