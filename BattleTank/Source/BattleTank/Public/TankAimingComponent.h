@@ -6,6 +6,7 @@
 #include "TankAimingComponent.generated.h"
 
 class UTankBarrel;
+class UTankTurret;
 
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
@@ -17,7 +18,7 @@ public:
 	// Sets default values for this component's properties
 	UTankAimingComponent();
 
-	void SetBarrelReference(UTankBarrel *BarrelToSet);
+	void SetBarrelReference(UTankBarrel *BarrelToSet, UTankTurret * TurretToSet);
 
 	// Called when the game starts
 	virtual void BeginPlay() override;
@@ -31,4 +32,5 @@ public:
 		
 private:
 	UTankBarrel * Barrel = nullptr;
+	UTankTurret * Turret = nullptr;
 };
