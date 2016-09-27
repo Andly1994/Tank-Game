@@ -23,6 +23,8 @@ public:
 private:
 	UPROPERTY(EditAnywhere)
 	float LaunchSpeed = 5000.f;
+	float ReloadTimeInSeconds = 3;
+	double LastFireTime = 0;
 	// Sets default values for this pawn's properties
 	ATank();
 
