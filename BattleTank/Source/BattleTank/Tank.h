@@ -21,8 +21,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Setup)
 	void Fire();
 private:
-	UPROPERTY(EditAnywhere)
-	float LaunchSpeed = 5000.f;
+	UPROPERTY(EditDefaultsOnly,Category = Firing)
+	float LaunchSpeed = 8000.f;
+	UPROPERTY(EditDefaultsOnly,Category = Firing)
 	float ReloadTimeInSeconds = 3;
 	double LastFireTime = 0;
 	// Sets default values for this pawn's properties
@@ -31,7 +32,7 @@ private:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	UPROPERTY(EditAnywhere, Category = Setup)
+	UPROPERTY(EditDefaultsOnly, Category = Setup)
 	TSubclassOf<AProjectile> ProjectileBluePrint;
 
 	// Called to bind functionality to input
